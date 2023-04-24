@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import styles from '@styles/formstyle.module.css'
+import axios from "axios"
 
 
 const SignupSchema = Yup.object().shape({
@@ -32,6 +33,63 @@ const SignupSchema = Yup.object().shape({
 const SignupForm = () => {
   const [display, setDisplay] = useState();
 
+      // const api = "https://api.ahglab.com/api:W7k9W8HQ/users?fbclid=IwAR3AObBReb32EzfJlWj6FApVzohe1l_rVukVC8iPaU5MMlymaVZhIzZmN0Y"
+      const api = "https://api.ahglab.com/api:W7k9W8HQ/users"
+      const [data, setData] = useState()
+      const [postStatus, setPostStatus] = useState()
+      const [patchStatus, setPatchStatus] = useState()
+      const [deleteStatus, setDeleteStatus] = useState()
+      // Methods
+      const getPosts = () => {
+          axios.get(`${api}`).then(function (response) {
+              setData(response?.data)
+              // console.log(data)
+          })
+      }
+      const postPosts = (passValue) => {
+          axios
+              .post(`${api}`, {
+                  id: passValue?.id,
+                  first_name: passValue?.firstName,
+                  last_name: passValue?.lastName,
+                  credentials: passValue?.email,
+                  password: passValue?.password,
+                  birthdate: passValue?.date,
+                  gender: passValue?.gender,
+                  pronoun: passValue?.pronouns,
+              })
+              .then(function (response) {
+                  setPostStatus(response?.status);
+                  console.log(response);
+              });
+          console.log("passValue == ", passValue);
+      };
+      useEffect(() => {
+          getPosts();
+      }, [data]);
+  
+      const patchPosts = (passValue) => {
+          axios
+              .put(`${api}/${passValue?.id}`, {
+                  id: passValue?.id,
+                  first_name: passValue?.firstName,
+                  last_name: passValue?.lastName,
+                  credentials: passValue?.email,
+                  password: passValue?.password,
+                  birthdate: passValue?.date,
+                  gender: passValue?.gender,
+                  pronoun: passValue?.pronouns,
+              })
+              .then(function (response) {
+                  setPatchStatus(response?.status);
+              });
+      }
+      const deletePosts = (passValue) => {
+          axios
+              .delete(`${api}/${passValue?.id}`).then(function (response) {
+                  setDeleteStatus(response?.status);
+              });
+      };
   return (
     <div className={styles.formContainer}>
       <Formik
@@ -49,8 +107,22 @@ const SignupForm = () => {
         }}
         validationSchema={SignupSchema}
         onSubmit={(values) => {
+          postPosts(values)
           setDisplay(`Welcome ${values.firstName} ${values.contactNumber} ${values.lastName}! Your email is ${values.email}, birthdate is ${values.birthMonth} ${values.birthdate} ${values.birthYear}, and gender is ${values.gender}.`);
-        }}
+          actions.resetForm({
+            values: {
+                id: "",
+                firstName: "",
+                lastName: "",
+                email: "",
+                password: "",
+                date: "",
+                gender: "",
+                pronouns: "",
+                customGender: "",
+            },
+        })
+    }}
       >
         {({ errors, touched, values }) => (
           <Form className={styles["form-container"]}>
@@ -139,10 +211,22 @@ const SignupForm = () => {
             <button type="submit" className={styles["form-submit"]}>Sign Up</button>
 
             {display && <p className={styles.success}>{display}</p>}
+            <p>{display}</p>
+              <p className={styles.status}>
+                Status:{" "}
+                {postStatus === 200 ? (
+                <span style={{ color: "green" }}>Success</span>
+                ) : postStatus === 500 ? (
+                <span style={{ color: "red" }}>Failed</span>
+                ) : (
+                "N/A"
+                )}
+              </p>
           </Form>
         )}
       </Formik>
     </div>
+    
   );
 };
 
