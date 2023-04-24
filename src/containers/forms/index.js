@@ -7,7 +7,7 @@ const FormsContainer = () => {
       {/* <p>Normal Form</p>
       <Forms />
       <br /> */}
-      <p>Formik Form</p>
+      {/* <p>Formik Form</p> */}
       <FormsFormik />
     </div>
   );
