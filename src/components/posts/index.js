@@ -95,7 +95,7 @@ const Posts = () => {
         {data &&
           data.splice(0, 5).map((value, key) => {
             return (
-              <p>
+              <p key={key}>
                 {key}: {value?.title}
               </p>
             );
