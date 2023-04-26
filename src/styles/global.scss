@@ -1,0 +1,168 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+
+
+$red: red;
+
+p {
+    color: $red;
+}
+
+body {
+    font-family: Inter, 'Noto Sans', sans-serif;
+    font-size: 12pt;
+    line-height: 23px;
+    font-weight: 300;
+    color: #555;
+    overflow-x: hidden;
+    background: #111;
+}
+
+strong, b {
+    font-weight: 600;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+    -moz-transition: color 0.2s ease-in-out;
+    -webkit-transition: color 0.2s ease-in-out;
+    -o-transition: color 0.2s ease-in-out;
+}
+
+    a.btn:visited {
+        color: #fff;
+    }
+
+    a:hover, a:focus {
+        text-decoration: underline;
+    }
+    .post-row > ul > li > a:hover {
+        color:#800000 !important;
+        text-decoration: underline !important;
+	}
+
+ul.ulist li a:hover {
+    text-decoration: underline;
+    color: #800;
+}
+
+i {
+    font-size: 1.1em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 600;
+    margin: 20px 0 10px 0;
+    color: #800;
+}
+h1 {
+    font-size: 24px;
+    line-height: 30px;
+}
+
+h2 {
+    font-size: 22px;
+    line-height: 28px;
+    margin-top:30px;
+}
+	.page-content > h2, .page-content > h1, #dvNEA > h1, #dvNEA > h2 {
+		margin-top:0;
+	}
+h3 {
+    font-size: 18px;
+    line-height: 24px;
+}
+
+h4 {
+    font-size: 16px;
+    line-height: 22px;
+}
+
+h5 {
+    font-size: 14px;
+    line-height: 20px;
+}
+
+h6 {
+    font-size: 12px;
+    line-height: 18px;
+}
+
+p {
+    color: #666;
+    font-family: 'Noto Sans', sans-serif;
+    line-height: 22px;
+    margin: 0;
+}
+
+    p strong {
+        font-weight: 600;
+    }
+
+.accent-color-bg {
+    color: #fff;
+}
+
+.fittext {
+    font-size: 38px;
+    font-weight: 300;
+    line-height: 1.6em;
+    margin-bottom: 35px;
+    color: rgba(0,0,0, 0.8);
+}
+
+    .fittext strong {
+        font-weight: 700;
+    }
+
+.page-content p {
+    margin-bottom: 30px;
+    line-height:2;
+}
+
+.page-content ul {
+	list-style: disc;
+    padding: 10px 20px;
+    margin:0;
+    line-height:2;
+}
+.page-content ol {
+    list-style: decimal;
+    padding: 10px 20px;
+    margin:0;
+    line-height:2;
+}
+.page-content ol > li > ol {
+	list-style: lower-alpha;
+    padding: 10px 40px;
+    margin:0;
+}
+.wite-text {
+    color: #fff;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.image-text {
+    margin-right: 10px;
+}
